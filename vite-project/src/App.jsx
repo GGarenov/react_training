@@ -1,23 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0); // first value is always the current state, 2nd value is the function that allows you to update the current state
+export default function App() {
+  const [resourceType, setResourceType] = useState("posts");
 
-  function decrementCount() {
-    setCount((prevCount) => prevCount - 1);
-  }
-
-  function incrementCount() {
-    setCount((prevCount) => prevCount + 1);
-  }
+  useEffect(() => {
+    console.log("onMount");
+  }, []); // this only happens when we call the resourceType for example
 
   return (
     <div>
-      <button onClick={decrementCount}> -</button>
-      <span> {count}</span>
-      <button onClick={incrementCount}>+</button>
+      <button onClick={() => setResourceType("posts")}>Posts</button>
+      <button onClick={() => setResourceType("users")}>Users</button>
+      <button onClick={() => setResourceType("comments")}>Comments</button>
+
+      <h1>{resourceType}</h1>
     </div>
   );
 }
-
-export default App;
