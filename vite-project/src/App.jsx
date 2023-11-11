@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [resourceType, setResourceType] = useState("posts");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
 
   useEffect(() => {
-    console.log("onMount");
-  }, []); // this only happens when we call the resourceType for example
+    window.addEventListener("resize", handleResize);
+  }, []);
 
-  return (
-    <div>
-      <button onClick={() => setResourceType("posts")}>Posts</button>
-      <button onClick={() => setResourceType("users")}>Users</button>
-      <button onClick={() => setResourceType("comments")}>Comments</button>
-
-      <h1>{resourceType}</h1>
-    </div>
-  );
+  return <div>{windowWidth}</div>;
 }
